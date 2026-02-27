@@ -73,31 +73,31 @@ body{
 
 <script>
 let slides = []
+let currentIndex = -1
 
-let img, title, subtitle
+const img = document.getElementById("hero-image")
+const title = document.getElementById("hero-title")
+const subtitle = document.getElementById("hero-subtitle")
 
-window.addEventListener("DOMContentLoaded", async () => {
-
-  img = document.getElementById("hero-image")
-  title = document.getElementById("hero-title")
-  subtitle = document.getElementById("hero-subtitle")
-
-  const res = await fetch("hero.json")
+async function loadHero(){
+  const res = await fetch("data.json")
   const data = await res.json()
   slides = data.slides
 
-  if(!slides || slides.length === 0) return
-
   updateSlide()
   setInterval(updateSlide, 1000)
-})
+}
 
 function updateSlide(){
-  if(slides.length === 0) return
+  if(!slides.length) return
 
-  const now = Date.now() / 1000
+  const now = Math.floor(Date.now() / 1000)
   const index = Math.floor(now / 5) % slides.length
-  showSlide(index)
+
+  if(index !== currentIndex){
+    currentIndex = index
+    showSlide(index)
+  }
 }
 
 function showSlide(i){
@@ -113,6 +113,8 @@ function showSlide(i){
     }
   },200)
 }
+
+loadHero()
 </script>
 
 </body>

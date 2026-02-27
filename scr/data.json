@@ -1,0 +1,39 @@
+{
+  "slides": [
+    {
+      "title": "Deu",
+      "subtitle": "FP001 • FP001110825M • ICT",
+      "image": "img/1.png"
+    },
+    {
+      "title": "Alpha",
+      "subtitle": "FP002 • FP002271025M • SMC",
+      "image": "img/2.png"
+    },
+    {
+      "title": "Cebol",
+      "subtitle": "FP003 • FP003071125U • NONE",
+      "image": "img/3.png"
+    },
+    {
+      "title": "Felo",
+      "subtitle": "FP004 • FP004131125M • ICT",
+      "image": "img/4.png"
+    },
+    {
+      "title": "Fela",
+      "subtitle": "FP005 • FP005131125S • ICT",
+      "image": "img/5.png"
+    },
+    {
+      "title": "Nova",
+      "subtitle": "FFP006 • FP006111225S • EBS",
+      "image": "img/6.png"
+    },
+    {
+      "title": "Nop",
+      "subtitle": "FP007 • FP007141225S • EBS",
+      "image": "img/7.png"
+    }
+  ]
+}

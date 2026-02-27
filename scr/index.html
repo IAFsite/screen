@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAF Idle Display</title>
+
+<style>
+body{
+  margin:0;
+  background:#0f0f12;
+  font-family:Arial, Helvetica, sans-serif;
+  overflow:hidden;
+}
+
+.hero{
+  position:relative;
+  height:100vh;
+  width:100vw;
+}
+
+.hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.85);
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+.hero img.show{
+  opacity:1;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, #0f0f12 10%, transparent);
+}
+
+.hero-content{
+  position:absolute;
+  bottom:60px;
+  left:60px;
+  z-index:2;
+  color:white;
+}
+
+.hero h1{
+  font-size:56px;
+  margin:0;
+}
+
+.hero p{
+  color:#aaa;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+  <img id="hero-image" src="">
+  <div class="hero-content">
+    <h1 id="hero-title"></h1>
+    <p id="hero-subtitle"></p>
+  </div>
+</section>
+
+<script>
+let slides = []
+
+let img, title, subtitle
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+  img = document.getElementById("hero-image")
+  title = document.getElementById("hero-title")
+  subtitle = document.getElementById("hero-subtitle")
+
+  const res = await fetch("hero.json")
+  const data = await res.json()
+  slides = data.slides
+
+  if(!slides || slides.length === 0) return
+
+  updateSlide()
+  setInterval(updateSlide, 1000)
+})
+
+function updateSlide(){
+  if(slides.length === 0) return
+
+  const now = Date.now() / 1000
+  const index = Math.floor(now / 5) % slides.length
+  showSlide(index)
+}
+
+function showSlide(i){
+  img.classList.remove("show")
+
+  setTimeout(()=>{
+    img.src = slides[i].image
+    title.textContent = slides[i].title
+    subtitle.textContent = slides[i].subtitle
+
+    img.onload = () => {
+      img.classList.add("show")
+    }
+  },200)
+}
+</script>
+
+</body>
+</html>
